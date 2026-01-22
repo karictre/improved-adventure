@@ -1,1 +1,0 @@
-baseurl: "{{ site.github.repository_name }}"
