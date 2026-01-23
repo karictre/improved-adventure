@@ -22,13 +22,31 @@ title: Home
       
             if (match) {
               const projectId = match[1]; // captured digits
-              const turboUrl = `https://turbowarp.org/${projectId}`;
+              const turboUrl = `https://turbowarp.org/${projectId}/embed`;
               console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
               el.src = turboUrl;
             }
           });
         } catch (error) {
+          try {
+          // Select all elements whose src starts with Scratch project URLs
+          const elements = document.querySelectorAll('[src^="https://turbowarp.org"]');
+      
+          elements.forEach(el => {
+            const turboURL = el.src;
+            const match = turboURL.match(/turbowarp.org\/(\d+)/);
+      
+            if (match) {
+              const projectId = match[1]; // captured digits
+              const scratchURL = `https://scratch.mit.edu/${projectId}/embed`;
+              console.log(`Replacing ${turboURL} with ${scratchURL}`);
+              el.src = scratchURL;
+            }
+          });
+        } catch (error) {
           console.error("Error processing elements:", error);
+        }
+      }
         }
       }
     </script>
