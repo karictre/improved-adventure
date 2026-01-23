@@ -6,11 +6,32 @@ title: Home
 <html>
   <head>
     <title>col swp</title>
-    <iframe src="https://turbowarp.org/795699094/embed" width="482" height="412" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen="" style="color-scheme: auto"></iframe>
-
+    
   </head>
   <body>
-    <button>yo</button>
-    <iframe src="scratch.mit.edu/projects/795699094/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+    <button type="button" onclick="turbo()">yo</button>
+    <script>
+      function turbo() {
+        try {
+          // Select all elements whose src starts with Scratch project URLs
+          const elements = document.querySelectorAll('[src^="https://scratch.mit.edu/projects"]');
+      
+          elements.forEach(el => {
+            const scratchUrl = el.src;
+            const match = scratchUrl.match(/projects\/(\d+)/);
+      
+            if (match) {
+              const projectId = match[1]; // captured digits
+              const turboUrl = `https://turbowarp.org/${projectId}`;
+              console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
+              el.src = turboUrl;
+            }
+          });
+        } catch (error) {
+          console.error("Error processing elements:", error);
+        }
+      }
+    </script>
+    <iframe src="https://scratch.mit.edu/projects/795699094/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
   </body>
 </html>
