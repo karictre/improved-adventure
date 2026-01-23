@@ -15,22 +15,21 @@ title: Home
         try {
           // Select all elements whose src starts with Scratch project URLs
           const elements = document.querySelectorAll('[src^="https://scratch.mit.edu/projects"]');
-      
-          elements.forEach(el => {
-            const scratchUrl = el.src;
-            const match = scratchUrl.match(/projects\/(\d+)/);
-      
-            if (match) {
-              const projectId = match[1]; // captured digits
-              const turboUrl = `https://turbowarp.org/${projectId}/embed`;
-              console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
-              el.src = turboUrl;
-            }
-          });
-        } catch (error) {
-          try {
-          // Select all elements whose src starts with Scratch project URLs
-          const elements = document.querySelectorAll('[src^="https://turbowarp.org"]');
+
+          if elements {
+            elements.forEach(el => {
+              const scratchUrl = el.src;
+              const match = scratchUrl.match(/projects\/(\d+)/);
+        
+              if (match) {
+                const projectId = match[1]; // captured digits
+                const turboUrl = `https://turbowarp.org/${projectId}/embed`;
+                console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
+                el.src = turboUrl;
+              }
+            });
+        } else {
+            const elements = document.querySelectorAll('[src^="https://turbowarp.org"]');
       
           elements.forEach(el => {
             const turboURL = el.src;
@@ -42,10 +41,10 @@ title: Home
               console.log(`Replacing ${turboURL} with ${scratchURL}`);
               el.src = scratchURL;
             }
-          });
+        }
+          
         } catch (error) {
           console.error("Error processing elements:", error);
-        }
       }
         } 
     </script>
