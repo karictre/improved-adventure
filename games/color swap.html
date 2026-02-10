@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: scratch-embed
 title: Home
 ---
 <!DOCTYPE html>
@@ -9,45 +9,6 @@ title: Home
     
   </head>
   <body>
-    <button type="button" onclick="turbo()">yo</button>
-    <script>
-      function turbo() {
-        try {
-          // Select all elements whose src starts with Scratch project URLs
-          const elements = document.querySelectorAll('[src^="https://scratch.mit.edu/projects"]');
-
-          if elements {
-            elements.forEach(el => {
-              const scratchUrl = el.src;
-              const match = scratchUrl.match(/projects\/(\d+)/);
-        
-              if (match) {
-                const projectId = match[1]; // captured digits
-                const turboUrl = `https://turbowarp.org/${projectId}/embed`;
-                console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
-                el.src = turboUrl;
-              }
-            });
-        } else {
-            const elements = document.querySelectorAll('[src^="https://turbowarp.org"]');
-      
-          elements.forEach(el => {
-            const turboURL = el.src;
-            const match = turboURL.match(/turbowarp.org\/(\d+)/);
-      
-            if (match) {
-              const projectId = match[1]; // captured digits
-              const scratchURL = `https://scratch.mit.edu/${projectId}/embed`;
-              console.log(`Replacing ${turboURL} with ${scratchURL}`);
-              el.src = scratchURL;
-            }
-        }
-          
-        } catch (error) {
-          console.error("Error processing elements:", error);
-      }
-        } 
-    </script>
     <iframe src="https://scratch.mit.edu/projects/795699094/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
   </body>
 </html>
