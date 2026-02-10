@@ -4,42 +4,43 @@ layout: default
 <!DOCTYPE html>
 <html>
   <head>
-    function turbo() {
-        try {
-          // Select all elements whose src starts with Scratch project URLs
-          elements = document.querySelectorAll('[src^="https://scratch.mit.edu/projects"]');
-
-          if elements {
+    <script>
+      function turbo() {
+          try {
+            // Select all elements whose src starts with Scratch project URLs
+            elements = document.querySelectorAll('[src^="https://scratch.mit.edu/projects"]');
+  
+            if elements {
+              elements.forEach(el => {
+                scratchUrl = el.src;
+                match = scratchUrl.match(/projects\/(\d+)/);
+          
+                if (match) {
+                  projectId = match[1]; // captured digits
+                  turboUrl = `https://turbowarp.org/${projectId}/embed`;
+                  console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
+                  el.src = turboUrl;
+                }
+              });
+          } else {
+              elements = document.querySelectorAll('[src^="https://turbowarp.org"]');
+        
             elements.forEach(el => {
-              scratchUrl = el.src;
-              match = scratchUrl.match(/projects\/(\d+)/);
+              turboURL = el.src;
+              match = turboURL.match(/turbowarp.org\/(\d+)/);
         
               if (match) {
                 projectId = match[1]; // captured digits
-                turboUrl = `https://turbowarp.org/${projectId}/embed`;
-                console.log(`Replacing ${scratchUrl} with ${turboUrl}`);
-                el.src = turboUrl;
+                scratchURL = `https://scratch.mit.edu/${projectId}/embed`;
+                console.log(`Replacing ${turboURL} with ${scratchURL}`);
+                el.src = scratchURL;
               }
-            });
-        } else {
-            elements = document.querySelectorAll('[src^="https://turbowarp.org"]');
-      
-          elements.forEach(el => {
-            turboURL = el.src;
-            match = turboURL.match(/turbowarp.org\/(\d+)/);
-      
-            if (match) {
-              projectId = match[1]; // captured digits
-              scratchURL = `https://scratch.mit.edu/${projectId}/embed`;
-              console.log(`Replacing ${turboURL} with ${scratchURL}`);
-              el.src = scratchURL;
-            }
+          }
+            
+          } catch (error) {
+            console.error("Error processing elements:", error);
         }
-          
-        } catch (error) {
-          console.error("Error processing elements:", error);
-      }
-        } 
+      } 
     </script>
   </head>
   <body>
